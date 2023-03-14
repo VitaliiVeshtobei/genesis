@@ -1,13 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "DM Sans", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ul {
+  list-style: none;
+}
+.pagination {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  margin: 0;
+}
+.pagination__page {
+  margin: 0 10px;
+
+  border-radius: 9px;
+}
+.pagination__link {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  color: #05386b;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 9px;
+}
+
+.pagination__link--disabled {
+  color: #ccc;
+  pointer-events: none;
+}
+
+.pagination__link--active {
+  background-color: #edf5e1;
+
+  color: #05386b;
 }
