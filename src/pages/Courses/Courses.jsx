@@ -3,10 +3,12 @@ import ReactPaginate from "react-paginate";
 import { getCourses } from "../../axios/axios";
 import { Course } from "../../components/Course/Course";
 import { CoursesItem, CoursesList } from "./CoursesStyled";
+import { LearningSpinner } from "../../components/Spinner/LearningSpiner";
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const itemsPerPage = 10;
   const pagesVisited = pageNumber * itemsPerPage;
@@ -19,15 +21,19 @@ export default function Courses() {
   };
 
   useEffect(() => {
+    setLoading(true);
     const data = async () => {
       const result = await getCourses();
       setCourses(result);
+      setLoading(false);
     };
     data();
   }, []);
 
   return (
     <>
+      {loading && <LearningSpinner />}
+
       <CoursesList>
         {displayData.map((course) => (
           <CoursesItem key={course.id}>

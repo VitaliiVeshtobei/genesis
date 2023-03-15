@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Image } from "./CourseStyles";
-import ReactPlayer from "react-player";
+import {
+  Image,
+  StyledReactPlayer,
+  ImageContainer,
+  VideoContainer,
+  TextContainer,
+  TextStyled,
+} from "./CourseStyled";
+
 export const Course = ({ data }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-
-  // console.log(data.meta.courseVideoPreview.link);
 
   function handleMouseEnter(data) {
     setIsPlaying(true);
@@ -16,45 +21,44 @@ export const Course = ({ data }) => {
   return (
     <div>
       <h2>{data.title}</h2>
-      <Image src={`${data.previewImageLink}/cover.webp`} alt="foto" />
-      <p>{data.description}</p>
-      <p>Number of lessons: {data.lessonsCount}</p>
-      <ul>
-        Skills:
-        {data.meta.skills?.map((skill, idx) => (
-          <li key={skill}>{`${idx + 1}. ${skill}`}</li>
-        ))}
-      </ul>
-      <p>Rating: {data.rating}</p>
-      <div
-      // style={{ backgroundColor: "red" }}
-      // onMouseEnter={() =>
-      //   handleMouseEnter(data.meta.courseVideoPreview?.link)
-      // }
-      // onMouseLeave={handleMouseLeave}
-      >
-        {/* {isPlaying ? (
-          <ReactPlayer
-            url={data.meta.courseVideoPreview.link}
-            playing={isPlaying}
-            controls={false}
-            width="100%"
-            height="100%"
-            muted
+      <ImageContainer>
+        {!isPlaying ? (
+          <Image
+            src={`${data.previewImageLink}/cover.webp`}
+            alt="foto"
+            onMouseEnter={handleMouseEnter}
           />
         ) : (
-          <img
-            style={{ width: "100%", height: "200px" }}
-            src={`${data.meta.courseVideoPreview.previewImageLink}/cover.webp`}
-            alt="foto"
-          />
-        )} */}
-        {/* <img
-          style={{ width: "100%", height: "200px" }}
-          src={`${data.meta.courseVideoPreview.previewImageLink}/cover.webp`}
-          alt="foto"
-        /> */}
-      </div>
+          <VideoContainer onMouseLeave={handleMouseLeave}>
+            <StyledReactPlayer
+              url={data.meta.courseVideoPreview?.link}
+              playing={isPlaying}
+              controls={false}
+              muted
+              width="100%"
+              height="auto"
+            />
+          </VideoContainer>
+        )}
+      </ImageContainer>
+
+      <TextContainer>
+        <TextStyled>
+          <span>Description:</span> {data.description}
+        </TextStyled>
+        <TextStyled>
+          <span>Number of lessons:</span> {data.lessonsCount}
+        </TextStyled>
+        <TextStyled>
+          <span>Skills:</span>
+          {data.meta.skills?.map((skill, idx) => (
+            <li key={skill}>{`${idx + 1}. ${skill}`}</li>
+          ))}
+        </TextStyled>
+        <TextStyled>
+          <span>Rating:</span> {data.rating}
+        </TextStyled>
+      </TextContainer>
     </div>
   );
 };
