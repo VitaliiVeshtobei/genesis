@@ -1,9 +1,8 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import ReactPlayer from "react-player";
 
 export const ImageContainer = styled("div")`
-  /* width: 640px; */
-  /* height: 200px; */
   border-radius: 35px;
   margin: 20px auto;
 `;
@@ -18,21 +17,38 @@ export const VideoContainer = styled("div")`
 
 export const StyledReactPlayer = styled(ReactPlayer)`
   video {
-    border: 1px solid black;
-    border-radius: 50px;
+    border-radius: 35px;
   }
 `;
 
-export const TextContainer = styled("div")`
-  float: left;
-`;
-
-export const TextStyled = styled.p`
+export const TextStyled = styled("p")`
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 10px;
   span {
     font-weight: bold;
     margin-right: 10px;
+  }
+`;
+export const ListStyled = styled("ul")`
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  span {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+`;
+export const ButtonStyled = styled(NavLink)`
+  text-decoration: none;
+  border-radius: 50px;
+  background-color: ${(p) => p.theme.bgc};
+  color: ${(p) => p.theme.primary};
+  cursor: pointer;
+  padding: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  &:hover {
+    background-color: ${(p) => p.theme.primary};
+    color: ${(p) => p.theme.secondary};
   }
 `;

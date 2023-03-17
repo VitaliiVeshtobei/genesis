@@ -6,7 +6,7 @@ export const CoursesList = styled("ul")`
   list-style: none;
   padding: 0;
   flex-wrap: wrap;
-  min-height: 500px;
+  /* min-height: 100%; */
 
   margin-bottom: -16px;
   li:nth-child(odd) {

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+
 import {
   Image,
   StyledReactPlayer,
   ImageContainer,
   VideoContainer,
-  TextContainer,
   TextStyled,
+  ListStyled,
+  ButtonStyled,
 } from "./CourseStyled";
 
 export const Course = ({ data }) => {
@@ -18,6 +20,7 @@ export const Course = ({ data }) => {
   function handleMouseLeave() {
     setIsPlaying(false);
   }
+
   return (
     <div>
       <h2>{data.title}</h2>
@@ -31,7 +34,7 @@ export const Course = ({ data }) => {
         ) : (
           <VideoContainer onMouseLeave={handleMouseLeave}>
             <StyledReactPlayer
-              url={data.meta.courseVideoPreview?.link}
+              url={data?.meta?.courseVideoPreview?.link}
               playing={isPlaying}
               controls={false}
               muted
@@ -42,23 +45,24 @@ export const Course = ({ data }) => {
         )}
       </ImageContainer>
 
-      <TextContainer>
+      <div>
         <TextStyled>
           <span>Description:</span> {data.description}
         </TextStyled>
         <TextStyled>
           <span>Number of lessons:</span> {data.lessonsCount}
         </TextStyled>
-        <TextStyled>
+        <ListStyled>
           <span>Skills:</span>
           {data.meta.skills?.map((skill, idx) => (
             <li key={skill}>{`${idx + 1}. ${skill}`}</li>
           ))}
-        </TextStyled>
+        </ListStyled>
         <TextStyled>
           <span>Rating:</span> {data.rating}
         </TextStyled>
-      </TextContainer>
+      </div>
+      <ButtonStyled to={`/lesson/${data.id}`}>Go to lesson</ButtonStyled>
     </div>
   );
 };

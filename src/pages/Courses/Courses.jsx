@@ -32,28 +32,32 @@ export default function Courses() {
 
   return (
     <>
-      {loading && <LearningSpinner />}
-
-      <CoursesList>
-        {displayData.map((course) => (
-          <CoursesItem key={course.id}>
-            <Course data={course} />
-          </CoursesItem>
-        ))}
-      </CoursesList>
-      <ReactPaginate
-        previousLabel={"<"}
-        nextLabel={">"}
-        pageCount={pageCount}
-        onPageChange={handlePageChange}
-        containerClassName={"pagination"}
-        previousLinkClassName={"pagination__link"}
-        nextLinkClassName={"pagination__link"}
-        disabledClassName={"pagination__link--disabled"}
-        activeClassName={"pagination__link--active"}
-        pageLinkClassName={"pagination__link"}
-        pageClassName={"pagination__page"}
-      />
+      {loading ? (
+        <LearningSpinner />
+      ) : (
+        <>
+          <CoursesList>
+            {displayData.map((course) => (
+              <CoursesItem key={course.id}>
+                <Course data={course} />
+              </CoursesItem>
+            ))}
+          </CoursesList>
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={pageCount}
+            onPageChange={handlePageChange}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination__link"}
+            nextLinkClassName={"pagination__link"}
+            disabledClassName={"pagination__link--disabled"}
+            activeClassName={"pagination__link--active"}
+            pageLinkClassName={"pagination__link"}
+            pageClassName={"pagination__page"}
+          />
+        </>
+      )}
     </>
   );
 }
