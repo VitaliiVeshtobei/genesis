@@ -14,7 +14,7 @@ export const SliderLessons = ({ course, chooseLesson }) => {
   const handleSlideClick = (index) => {
     setActiveIndex(index);
   };
-  console.log(activeIndex);
+
   return (
     <div>
       <SliderStyled {...settings}>

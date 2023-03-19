@@ -8,6 +8,7 @@ import { SliderContainer, TitleStyled } from "./LessonStyled";
 import { LearningSpinner } from "../../components/Spinner/LearningSpiner";
 import { SliderLessons } from "../../components/Slider/Slider";
 import { ReactPlayer } from "../../components/ReactPlayer/ReactPlayer";
+import { setLocalStorageCourse } from "../../localStorage/localStorage";
 
 export const Lesson = () => {
   const [course, setCourse] = useState(null);
@@ -22,13 +23,23 @@ export const Lesson = () => {
     const data = async () => {
       setLoading(true);
       const result = await getLesson(lessonId);
-
+      const savedLesson = localStorage.getItem("lesson");
+      setLocalStorageCourse(result);
+      // console.log(savedLesson);
+      // if (savedLesson) {
+      //   setCurrentLesson(savedLesson);
+      // }
+      savedLesson !== "null" && savedLesson
+        ? setLesson(savedLesson)
+        : setLesson(result.lessons[0].link);
+      // setLesson(result.lessons[0].link);
       setCourse(result);
-      setLesson(result.lessons[0].link);
+
       setLoading(false);
     };
     data();
   }, [lessonId]);
+  console.log(lesson);
 
   const chooseLesson = ({ link, status, title }) => {
     if (status === "locked") {
