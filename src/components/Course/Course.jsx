@@ -62,7 +62,7 @@ export const Course = ({ data }) => {
           <span>Rating:</span> {data.rating}
         </TextStyled>
       </div>
-      <ButtonStyled to={`/lesson/${data.id}`}>Go to lesson</ButtonStyled>
+      <ButtonStyled to={`/course/${data.id}`}>Go to lesson</ButtonStyled>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { ImageStyled, SliderStyled } from "./SliderStyled";
 
 export const SliderLessons = ({ course, chooseLesson }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
   const settings = {
     infinite: true,
     speed: 500,

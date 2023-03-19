@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import { getLesson } from "../../axios/axios";
-import { SliderContainer, TitleStyled } from "./LessonStyled";
+import { SliderContainer, TitleStyled, ButtonStyled } from "./CourseStyled";
 import { LearningSpinner } from "../../components/Spinner/LearningSpiner";
 import { SliderLessons } from "../../components/Slider/Slider";
 import { ReactPlayer } from "../../components/ReactPlayer/ReactPlayer";
@@ -13,29 +13,32 @@ import {
   setLessonLink,
 } from "../../localStorage/localStorage";
 
-export const Lesson = () => {
+export const Course = () => {
   const [course, setCourse] = useState(null);
   const [lesson, setLesson] = useState(null);
   const [lessonTitle, setLessonTitle] = useState(null);
 
   const [loading, setLoading] = useState(false);
 
-  const { lessonId } = useParams();
+  const { courseId } = useParams();
+
+  const handleGoBack = () => {
+    window.history.back();
+  };
 
   useEffect(() => {
     const data = async () => {
       setLoading(true);
-      const result = await getLesson(lessonId);
+      const result = await getLesson(courseId);
 
       const savedCourseLocal = getLocalStorageCourse();
 
       setCourse(result);
-
-      setLoading(false);
       setLessonLink(savedCourseLocal, result, setLesson, setLessonTitle);
+      setLoading(false);
     };
     data();
-  }, [lessonId]);
+  }, [courseId]);
 
   const chooseLesson = ({ link, status, title }) => {
     if (status === "locked") {
@@ -58,10 +61,14 @@ export const Lesson = () => {
   return (
     <div>
       <TitleStyled>{course?.title}</TitleStyled>
+
       {loading ? (
         <LearningSpinner />
       ) : (
         <div>
+          <ButtonStyled type="button" onClick={handleGoBack}>
+            To courses
+          </ButtonStyled>
           <ReactPlayer
             lesson={lesson}
             lessonTitle={lessonTitle}

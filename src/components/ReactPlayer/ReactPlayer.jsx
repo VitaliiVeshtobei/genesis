@@ -1,10 +1,15 @@
 import React, { useRef } from "react";
+import { toast } from "react-toastify";
 import {
   getProgressLocal,
   setLinkLocal,
   setProgressLocal,
 } from "../../localStorage/localStorage";
-import { ReactPlayerStyled } from "./ReactPlayerStyled";
+import {
+  ContainerStyled,
+  ReactPlayerStyled,
+  TitleStyled,
+} from "./ReactPlayerStyled";
 
 export const ReactPlayer = ({ lesson, lessonTitle, course }) => {
   const playerRef = useRef(null);
@@ -12,17 +17,28 @@ export const ReactPlayer = ({ lesson, lessonTitle, course }) => {
   const handlePlayerReady = () => {
     const progress = getProgressLocal(course, lesson);
     playerRef.current.seekTo(progress);
-    setLinkLocal(course, lesson);
+    setLinkLocal(course, lesson, lessonTitle);
+    toast.info(`Now playing - ${lessonTitle}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   };
   const handleProgress = (progress) => {
     setProgressLocal(progress, course);
   };
 
   return (
-    <div>
+    <ContainerStyled>
+      <TitleStyled>{lessonTitle}</TitleStyled>
       <ReactPlayerStyled
         ref={playerRef}
-        progressInterval={10000}
+        progressInterval={1000}
         onProgress={handleProgress}
         url={lesson}
         controls={true}
@@ -31,6 +47,6 @@ export const ReactPlayer = ({ lesson, lessonTitle, course }) => {
         title={lessonTitle}
         onReady={handlePlayerReady}
       />
-    </div>
+    </ContainerStyled>
   );
 };

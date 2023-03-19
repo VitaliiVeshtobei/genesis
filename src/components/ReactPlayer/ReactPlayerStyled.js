@@ -7,3 +7,13 @@ export const ReactPlayerStyled = styled(ReactPlayer)`
     border-radius: 35px;
   }
 `;
+
+export const ContainerStyled = styled("div")`
+  position: relative;
+`;
+export const TitleStyled = styled("h3")`
+  position: absolute;
+  left: 50%;
+  color: ${(p) => p.theme.secondary};
+  transform: translate(-50%);
+`;

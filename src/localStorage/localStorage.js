@@ -8,8 +8,9 @@ export const setLocalStorageCourse = ({ title, lessons }) => {
   const courseInfo = [];
   const data = {
     course: title,
-    lesson: { link: lessons[0].link, progress: 0 },
+    lesson: { link: lessons[0].link, progress: 0, title: lessons[0].title },
   };
+  console.log(lessons[0].title);
   courseInfo.push(data);
   localStorage.setItem("course-info", JSON.stringify(courseInfo));
 };
@@ -37,12 +38,17 @@ export const setLessonLink = (
 
   if (localDataCourse.length && localDataCourse[0].lesson.link) {
     setLesson(localDataCourse[0].lesson.link);
+    setLessonTitle(localDataCourse[0].lesson.title);
     return;
   }
   if (!localDataCourse.length) {
     const data = {
       course: result.title,
-      lesson: { link: result.lessons[0].link, progress: 0 },
+      lesson: {
+        link: result.lessons[0].link,
+        progress: 0,
+        title: result.lessons[0].title,
+      },
     };
     setLesson(result.lessons[0].link);
     setLessonTitle(result.lessons[0].title);
@@ -69,9 +75,11 @@ export const getProgressLocal = ({ title }, link) => {
   return 0;
 };
 
-export const setLinkLocal = ({ title }, link) => {
+export const setLinkLocal = ({ title }, link, lessonTitle) => {
   const data = JSON.parse(getLocalStorageCourse());
   const index = data.findIndex((itm) => itm.course === title);
   data[index].lesson.link = link;
+
+  data[index].lesson.title = lessonTitle;
   localStorage.setItem("course-info", JSON.stringify(data));
 };
