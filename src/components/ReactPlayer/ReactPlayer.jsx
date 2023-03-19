@@ -1,46 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
+import {
+  getProgressLocal,
+  setLinkLocal,
+  setProgressLocal,
+} from "../../localStorage/localStorage";
 import { ReactPlayerStyled } from "./ReactPlayerStyled";
 
-export const ReactPlayer = ({ lesson, lessonTitle }) => {
-  const [progress, setProgress] = useState(0);
-  //   const [currentLesson, setCurrentLesson] = useState("");
+export const ReactPlayer = ({ lesson, lessonTitle, course }) => {
   const playerRef = useRef(null);
 
-  useEffect(() => {
-    const savedProgress = localStorage.getItem("videoProgress");
-    // const savedLesson = localStorage.getItem("lesson");
-
-    // if (savedLesson) {
-    //   setCurrentLesson(savedLesson);
-    // }
-    lesson && localStorage.setItem("lesson", lesson);
-    const lessInfo = { progress, lessonTitle };
-
-    localStorage.setItem("lesson-info", JSON.stringify(lessInfo));
-
-    if (savedProgress) {
-      setProgress(parseFloat(savedProgress));
-      playerRef.current.seekTo(parseFloat(savedProgress));
-    }
-  }, [lesson]);
-
   const handlePlayerReady = () => {
+    const progress = getProgressLocal(course, lesson);
     playerRef.current.seekTo(progress);
+    setLinkLocal(course, lesson);
   };
   const handleProgress = (progress) => {
-    localStorage.setItem("videoProgress", progress.playedSeconds);
-    const obj = localStorage.getItem("lesson-info");
-    const newProgress = {
-      ...JSON.parse(obj),
-      progress: progress.playedSeconds,
-    };
-
-    localStorage.setItem("lesson-info", JSON.stringify(newProgress));
+    setProgressLocal(progress, course);
   };
+
   return (
     <div>
       <ReactPlayerStyled
         ref={playerRef}
+        progressInterval={10000}
         onProgress={handleProgress}
         url={lesson}
         controls={true}
