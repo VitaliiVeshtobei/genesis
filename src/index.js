@@ -8,7 +8,7 @@ import { theme } from "./theme/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/">
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
