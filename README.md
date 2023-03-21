@@ -10,4 +10,4 @@
 
 Були проблеми з CORS, тому локально в браузер chrome було встановлено розширення ALLOW CORS. На локально сервері все добре працює.
 
-Додаток розміщений на Vercel genesis-beryl.vercel.app
+Додаток розміщений на Vercel https://genesis-beryl.vercel.app/
