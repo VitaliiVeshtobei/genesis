@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import DEVICE from "../../constants/screensizes";
 export const TitleStyled = styled("h2")`
   text-align: center;
   margin-bottom: 16px;
@@ -7,15 +7,36 @@ export const TitleStyled = styled("h2")`
 `;
 
 export const SliderContainer = styled("div")`
-  width: 750px;
-  margin: 0 auto;
+  @media ${DEVICE.mobile} {
+    padding: 0 50px;
+  }
+  @media ${DEVICE.tablet} {
+    padding: 0 70px;
+  }
+  @media ${DEVICE.laptop} {
+  }
 `;
 
 export const ButtonStyled = styled("button")`
   text-decoration: none;
   display: inline-block;
   padding: 15px 30px;
-  /* margin: 10px 20px; */
+  @media ${DEVICE.mobile} {
+    margin-left: 8px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding: 5px 10px;
+  }
+  @media ${DEVICE.tablet} {
+    margin-left: 30px;
+    margin-top: 0;
+    padding: 10px 20px;
+  }
+  @media ${DEVICE.laptop} {
+    margin-left: 50px;
+    margin-top: 0;
+    padding: 15px 30px;
+  }
   margin-left: 50px;
   margin-top: 50px;
   border-radius: 10px;

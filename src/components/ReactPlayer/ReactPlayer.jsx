@@ -42,7 +42,7 @@ export const ReactPlayer = ({ lesson, lessonTitle, course }) => {
         onProgress={handleProgress}
         url={lesson}
         controls={true}
-        width="50%"
+        width="100%"
         height="auto"
         title={lessonTitle}
         onReady={handlePlayerReady}

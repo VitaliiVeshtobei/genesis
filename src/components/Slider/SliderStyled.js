@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Slider from "react-slick";
+import DEVICE from "../../constants/screensizes";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -9,6 +10,10 @@ export const ImageStyled = styled("img")`
   height: 100px;
 `;
 export const SliderStyled = styled(Slider)`
+  @media ${DEVICE.mobile} {
+    slidestoshow: 4;
+  }
+
   .slick-slide img {
     border-radius: 35px;
     margin: 0 auto;

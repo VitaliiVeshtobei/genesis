@@ -40,6 +40,9 @@ export const ListStyled = styled("ul")`
   }
 `;
 export const ButtonStyled = styled(NavLink)`
+  display: block;
+  width: 150px;
+  margin: 0 auto;
   text-decoration: none;
   border-radius: 50px;
   background-color: ${(p) => p.theme.bgc};

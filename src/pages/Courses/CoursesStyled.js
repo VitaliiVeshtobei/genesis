@@ -1,22 +1,38 @@
 import styled from "styled-components";
-
+import DEVICE from "../../constants/screensizes";
 export const CoursesList = styled("ul")`
   display: flex;
   justify-content: center;
   list-style: none;
   padding: 0;
   flex-wrap: wrap;
-  /* min-height: 100%; */
 
   margin-bottom: -16px;
-  li:nth-child(odd) {
+  /* li:nth-child(odd) {
     margin-right: 16px;
-  }
+  } */
 `;
 
 export const CoursesItem = styled("li")`
   text-align: center;
-  width: calc(100% / 2 - 90px);
+  @media ${DEVICE.mobile} {
+    width: calc(100% / 1.1);
+    margin-bottom: 16px;
+    padding: 12px;
+  }
+  @media ${DEVICE.tablet} {
+    width: calc(100% / 2 - 45px);
+    :nth-child(odd) {
+      margin-right: 16px;
+    }
+  }
+  @media ${DEVICE.laptop} {
+    width: calc(100% / 2 - 90px);
+    :nth-child(odd) {
+      margin-right: 32px;
+    }
+  }
+
   padding: 24px;
   margin-bottom: 16px;
   border-radius: 35px;
